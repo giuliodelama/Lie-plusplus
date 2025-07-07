@@ -499,11 +499,11 @@ class Gal3
 
     FPType c1 = (ang - s) / ang_p3;
     FPType c2 = (0.5 * ang_p2 + c - 1.0) / ang_p4;
-    FPType c3 = (ang * (1.0 + 0.5 * c) - 1.5 * s) / ang_p5;
+    FPType c3 = (ang * (2.0 + c) - 3 * s) / ang_p5;
 
     typename SO3Type::MatrixType m1 = p * r + r * p + p * r * p;
     typename SO3Type::MatrixType m2 = p * p * r + r * p * p - 3.0 * p * r * p;
-    typename SO3Type::MatrixType m3 = p * r * p * p + p * p * r * p;
+    typename SO3Type::MatrixType m3 = p * p * r * p;
 
     return 0.5 * r + c1 * m1 + c2 * m2 + c3 * m3;
   }
@@ -531,17 +531,14 @@ class Gal3
     FPType ang_p4 = ang_p3 * ang;
     FPType ang_p5 = ang_p4 * ang;
     FPType ang_p6 = ang_p5 * ang;
-    FPType ang_p7 = ang_p6 * ang;
 
     FPType c0 = 1 / 6;
     FPType c1 = (0.5 * ang_p2 + c - 1.0) / ang_p4;
     FPType c2 = (c0 * ang_p3 - ang + s) / ang_p5;
     FPType c3 = -(2.0 * c + ang * s - 2.0) / ang_p4;
-    FPType c4 = (c0 * ang_p3 + ang * c + ang - 2.0 * s) / ang_p5;
-    FPType c5 = -(0.75 * ang * c + (0.25 * ang_p2 - 0.75) * s) / ang_p5;
-    FPType c6 = (0.25 * ang * c + 0.5 * ang - 0.75 * s) / ang_p5;
-    FPType c7 = ((0.25 * ang_p2 - 2.0) * c - 1.25 * ang * s + 2.0) / ang_p6;
-    FPType c8 = (c0 * ang_p3 + 1.25 * ang * c + (0.25 * ang_p2 - 1.25) * s) / ang_p7;
+    FPType c4 = (c0 * ang_p3 + ang * (c + 1) - 2.0 * s) / ang_p5;
+    FPType c5 = -(ang * (c0 + 2.0 * c) + (0.5 * ang_p2 - 2.0) * s) / ang_p5;
+    FPType c6 = (0.5 * ang_p2 * (1 + c) - 2.0 * ang * s + 2.0 * (1 - c)) / ang_p6;
 
     typename SO3Type::MatrixType m1 = r * p;
     typename SO3Type::MatrixType m2 = r * p * p;
@@ -549,10 +546,8 @@ class Gal3
     typename SO3Type::MatrixType m4 = p * p * r;
     typename SO3Type::MatrixType m5 = p * r * p;
     typename SO3Type::MatrixType m6 = p * p * r * p;
-    typename SO3Type::MatrixType m7 = p * r * p * p;
-    typename SO3Type::MatrixType m8 = p * p * r * p * p;
 
-    return c0 * r + c1 * m1 + c2 * m2 + c3 * m3 + c4 * m4 + c5 * m5 + c6 * m6 + c7 * m7 + c8 * m8;
+    return c0 * r + c1 * m1 + c2 * m2 + c3 * m3 + c4 * m4 + c5 * m5 + c6 * m6;
   }
 
   /**
