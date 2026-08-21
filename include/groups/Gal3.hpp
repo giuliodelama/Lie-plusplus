@@ -534,7 +534,7 @@ class Gal3
     FPType ang_p5 = ang_p4 * ang;
     FPType ang_p6 = ang_p5 * ang;
 
-    FPType c0 = 1 / 6;
+    FPType c0 = FPType(1.0) / FPType(6.0);
     FPType c1 = (0.5 * ang_p2 + c - 1.0) / ang_p4;
     FPType c2 = (c0 * ang_p3 - ang + s) / ang_p5;
     FPType c3 = -(2.0 * c + ang * s - 2.0) / ang_p4;
